@@ -35,7 +35,8 @@ public class StateCensusAnalyzer
       }
       catch (RuntimeException e)
       {
-         throw new CSVFileException(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION,"Cannot Map CSV Header");
+         throw new CSVFileException(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION,
+               "Cannot Map CSV Header Or issue With Delimiter");
       }
 
       return  stateCount;
