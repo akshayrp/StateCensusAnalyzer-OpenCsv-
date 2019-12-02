@@ -10,17 +10,19 @@ public class StateCensusTests
 {
    StateCensusAnalyzer stateAnalyzer = new StateCensusAnalyzer();
    private static final String STATE_CODE_FILE_PATH = "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateCode.csv";
-   private static final String STATE_DATA_FILE_PATH =  "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateCensusData.csv";
+   private static final String STATE_DATA_FILE_PATH
+         = "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateCensusData.csv";
+
    @Test
-   public void givenCSVFile_WhenCorrect_CountsNumberOfRecordsMatches() throws IOException
+   public void givenCSVFile_WhenCorrect_CountsNumberOfRecordsMatches()
    {
       try
       {
-         Assert.assertEquals(37,stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
+         Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
       catch (CSVFileException e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH,e.type);
+         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH, e.type);
       }
    }
 
@@ -29,11 +31,11 @@ public class StateCensusTests
    {
       try
       {
-         Assert.assertEquals(37,stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
+         Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
       catch (CSVFileException e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH,e.type);
+         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH, e.type);
       }
    }
 
@@ -42,11 +44,11 @@ public class StateCensusTests
    {
       try
       {
-         Assert.assertEquals(37,stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
+         Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
       catch (CSVFileException e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION,e.type);
+         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
 
@@ -55,11 +57,11 @@ public class StateCensusTests
    {
       try
       {
-         Assert.assertEquals(37,stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
+         Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
       catch (CSVFileException e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION,e.type);
+         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
 
@@ -68,11 +70,24 @@ public class StateCensusTests
    {
       try
       {
-         Assert.assertEquals(37,stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
+         Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
       catch (CSVFileException e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION,e.type);
+         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+      }
+   }
+
+   @Test
+   public void givenStateDataCSVFile_WhenCorrect_CountsNumberOfRecordsMatches()
+   {
+      try
+      {
+         Assert.assertEquals(29, stateAnalyzer.readStateDataFromFile(STATE_DATA_FILE_PATH));
+      }
+      catch (CSVFileException e)
+      {
+         e.printStackTrace();
       }
    }
 }

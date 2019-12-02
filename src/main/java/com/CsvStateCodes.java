@@ -2,8 +2,9 @@ package com;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class CsvStates
+public class CsvStateCodes
 {
+
    @CsvBindByName
    private int SrNo;
 
