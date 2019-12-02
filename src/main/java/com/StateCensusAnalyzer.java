@@ -2,6 +2,7 @@ package com;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -19,19 +20,24 @@ public class StateCensusAnalyzer
       try
       {
          reader = Files.newBufferedReader(Paths.get(stateCodeFilePath));
+         CsvToBean<CsvStates> csvToBean = new CsvToBeanBuilder(reader).withType(CsvStates.class).withIgnoreLeadingWhiteSpace(true).build();
+         Iterator<CsvStates> CsvStateIterator = csvToBean.iterator();
+
+         while(CsvStateIterator.hasNext())
+         {
+            stateCount++;
+            CsvStates csvStates = CsvStateIterator.next();
+         }
       }
       catch (IOException e)
       {
          throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH,"File Not Found");
       }
-      CsvToBean<CsvStates> csvToBean = new CsvToBeanBuilder(reader).withType(CsvStates.class).withIgnoreLeadingWhiteSpace(true).build();
-      Iterator<CsvStates> CsvStateIterator = csvToBean.iterator();
-
-      while(CsvStateIterator.hasNext())
+      catch (RuntimeException e)
       {
-         stateCount++;
-         CsvStates csvStates = CsvStateIterator.next();
+         throw new CSVFileException(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION,"Cannot Map CSV Header");
       }
+
       return  stateCount;
    }
 }

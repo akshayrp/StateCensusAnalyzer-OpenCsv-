@@ -4,7 +4,7 @@ public class CSVFileException  extends Exception
 {
    enum ExceptionType
    {
-     WRONG_FILE_PATH
+     WRONG_FILE_PATH, CSV_HEADER_MAPPING_EXCEPTION
    }
    ExceptionType type;
 
