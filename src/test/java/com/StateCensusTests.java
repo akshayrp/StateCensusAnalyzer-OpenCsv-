@@ -83,7 +83,7 @@ public class StateCensusTests
    {
       try
       {
-         Assert.assertEquals(29, stateAnalyzer.readStateDataFromFile(STATE_DATA_FILE_PATH));
+         Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
       catch (CSVFileException e)
       {
@@ -96,7 +96,7 @@ public class StateCensusTests
    {
       try
       {
-         Assert.assertEquals(29, stateAnalyzer.readStateDataFromFile(STATE_DATA_FILE_PATH));
+         Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
       catch (CSVFileException e)
       {
@@ -109,7 +109,7 @@ public class StateCensusTests
    {
       try
       {
-         Assert.assertEquals(29, stateAnalyzer.readStateDataFromFile(STATE_CODE_FILE_PATH));
+         Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
       catch (CSVFileException e)
       {
@@ -122,7 +122,7 @@ public class StateCensusTests
    {
       try
       {
-         Assert.assertEquals(29, stateAnalyzer.readStateDataFromFile(STATE_DATA_FILE_PATH));
+         Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
       catch (CSVFileException e)
       {
@@ -135,7 +135,7 @@ public class StateCensusTests
    {
       try
       {
-         Assert.assertEquals(29, stateAnalyzer.readStateDataFromFile(STATE_DATA_FILE_PATH));
+         Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
       catch (CSVFileException e)
       {
