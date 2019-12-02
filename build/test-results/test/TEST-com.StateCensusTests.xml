@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.StateCensusTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-02T04:57:14" hostname="admin1-desktop" time="0.083">
+  <properties/>
+  <testcase name="givenCSVFile_WhenCorrect_CountsNumberOfRecordsMatches" classname="com.StateCensusTests" time="0.083"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
