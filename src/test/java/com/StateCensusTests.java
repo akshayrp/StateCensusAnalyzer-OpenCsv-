@@ -103,4 +103,17 @@ public class StateCensusTests
          Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH, e.type);
       }
    }
+
+   @Test
+   public void givenStateDataCSVFile_WhenTypeIncorrect_ThrowsException()
+   {
+      try
+      {
+         Assert.assertEquals(29, stateAnalyzer.readStateDataFromFile(STATE_CODE_FILE_PATH));
+      }
+      catch (CSVFileException e)
+      {
+         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+      }
+   }
 }
