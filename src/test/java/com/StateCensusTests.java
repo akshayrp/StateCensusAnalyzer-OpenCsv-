@@ -27,7 +27,7 @@ public class StateCensusTests
    }
 
    @Test
-   public void givenCSVFile_WhenIncorrect_ThrowsCustomException() throws CSVFileException
+   public void givenCSVFile_WhenIncorrect_ThrowsCustomException()
    {
       try
       {
@@ -40,7 +40,7 @@ public class StateCensusTests
    }
 
    @Test
-   public void givenCSVFile_WhenTypeIncorrect_ThrowsException() throws CSVFileException
+   public void givenCSVFile_WhenTypeIncorrect_ThrowsException()
    {
       try
       {
@@ -88,6 +88,19 @@ public class StateCensusTests
       catch (CSVFileException e)
       {
          e.printStackTrace();
+      }
+   }
+
+   @Test
+   public void givenStateDataCSVFile_WhenIncorrect_ThrowsCustomException()
+   {
+      try
+      {
+         Assert.assertEquals(29, stateAnalyzer.readStateDataFromFile(STATE_DATA_FILE_PATH));
+      }
+      catch (CSVFileException e)
+      {
+         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH, e.type);
       }
    }
 }
