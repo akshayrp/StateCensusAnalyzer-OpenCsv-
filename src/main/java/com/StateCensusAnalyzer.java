@@ -12,10 +12,18 @@ import java.util.Iterator;
 public class StateCensusAnalyzer
 {
 
-   public int readDataFromFile(String stateCodeFilePath) throws IOException
+   public int readDataFromFile(String stateCodeFilePath) throws CSVFileException
    {
       int stateCount=0;
-      Reader reader = Files.newBufferedReader(Paths.get(stateCodeFilePath));
+      Reader reader = null;
+      try
+      {
+         reader = Files.newBufferedReader(Paths.get(stateCodeFilePath));
+      }
+      catch (IOException e)
+      {
+         throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH,"File Not Found");
+      }
       CsvToBean<CsvStates> csvToBean = new CsvToBeanBuilder(reader).withType(CsvStates.class).withIgnoreLeadingWhiteSpace(true).build();
       Iterator<CsvStates> CsvStateIterator = csvToBean.iterator();
 
