@@ -129,4 +129,17 @@ public class StateCensusTests
          Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
+
+   @Test
+   public void givenStateDataCSVFile_WhenHeaderIncorrect_ThrowsException()
+   {
+      try
+      {
+         Assert.assertEquals(29, stateAnalyzer.readStateDataFromFile(STATE_DATA_FILE_PATH));
+      }
+      catch (CSVFileException e)
+      {
+         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+      }
+   }
 }
