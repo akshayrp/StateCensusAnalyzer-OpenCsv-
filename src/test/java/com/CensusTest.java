@@ -1,12 +1,9 @@
 package com;
 
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.junit.Assert;
 import org.junit.Test;
 
-
-
-public class StateCensusTests
+public class CensusTest
 {
    StateCensusAnalyzer stateAnalyzer = new StateCensusAnalyzer();
    private static final String STATE_CODE_FILE_PATH = "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateCode.csv";

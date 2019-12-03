@@ -1,43 +1,68 @@
 package com;
 
+import com.google.gson.Gson;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
+import java.util.*;
 
 public class StateCensusAnalyzer
 {
+   List<CSVStateData> CsvCensusDataList = new ArrayList<>();
+
    public int readDataFromFile(String FilePath) throws CSVFileException
    {
-      int stateCount=0;
+      int stateCount = 0;
       Reader reader = null;
       try
       {
          reader = Files.newBufferedReader(Paths.get(FilePath));
-         CsvToBean<Object> csvToBean = new CsvToBeanBuilder(reader).withType(Object.class)
+         CsvToBean<CSVStateData> csvToBean = new CsvToBeanBuilder(reader).withType(CSVStateData.class)
                .withIgnoreLeadingWhiteSpace(true).build();
-         Iterator<Object> CsvStateIterator = csvToBean.iterator();
+         Iterator<CSVStateData> CsvStateIterator = csvToBean.iterator();
 
-         while(CsvStateIterator.hasNext())
+         while (CsvStateIterator.hasNext())
          {
             stateCount++;
-            Object csvStates = CsvStateIterator.next();
+            CSVStateData csvUser = CsvStateIterator.next();
+            CsvCensusDataList.add(csvUser);
          }
+         Collections.sort(CsvCensusDataList, Collections.reverseOrder());
       }
       catch (IOException e)
       {
-         throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH,"File Not Found");
+         throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH, "File Not Found");
       }
       catch (RuntimeException e)
       {
          throw new CSVFileException(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION,
                "Cannot Map CSV Header Or issue With Delimiter");
       }
-
-      return  stateCount;
+      return stateCount;
    }
+
+
+   public Boolean storeDataIntoJSON(String FilePath) throws CSVFileException
+   {
+      try
+      {
+         Gson gson = new Gson();
+         String json = gson.toJson(CsvCensusDataList);
+         FileWriter writer = null;
+         writer = new FileWriter(FilePath);
+         writer.write(json);
+         writer.close();
+         return true;
+      }
+      catch (IOException e)
+      {
+         throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH, "File Not Found");
+      }
+   }
+
 }

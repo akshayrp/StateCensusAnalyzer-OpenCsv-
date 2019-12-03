@@ -2,11 +2,11 @@ package com;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class CSVStateData
+public class CSVStateData implements Comparable
 {
 
    @CsvBindByName(required = true)
-   private String State;
+   private String StateName;
 
    @CsvBindByName
    private String Population;
@@ -17,14 +17,14 @@ public class CSVStateData
    @CsvBindByName
    private String DensityPerSqKm;
 
-   public String getState()
+   public String getStateName()
    {
-      return State;
+      return StateName;
    }
 
-   public void setState(String state)
+   public void setStateName(String stateName)
    {
-      State = state;
+      StateName = stateName;
    }
 
    public String getPopulation()
@@ -57,4 +57,9 @@ public class CSVStateData
       DensityPerSqKm = densityPerSqKm;
    }
 
+
+   @Override
+   public int compareTo(Object o) {
+      return (((CSVStateData) o).getStateName()).compareTo(this.getStateName());
+   }
 }
