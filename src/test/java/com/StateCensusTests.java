@@ -105,4 +105,19 @@ public class StateCensusTests
          Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
+
+   @Test
+   public void givenCSVFileToConvertToJson_WhenDestinationFilePathIncorrect_Returns()
+   {
+      try
+      {
+         Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
+         Assert.assertTrue(stateAnalyzer.storeDataIntoJSON(STATE_DATA_JSON_FILE_PATH));
+      }
+      catch (CSVFileException e)
+      {
+         System.out.println("Enter Correct File path");
+         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH, e.type);
+      }
+   }
 }
