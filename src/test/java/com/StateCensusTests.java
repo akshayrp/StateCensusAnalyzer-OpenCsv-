@@ -9,7 +9,7 @@ public class StateCensusTests
 {
    StateCensusAnalyzer stateAnalyzer = new StateCensusAnalyzer();
    private static final String STATE_DATA_FILE_PATH
-         = "/home/admin1/IdeaProjects/StateCensorAnalyzersrc/StateCensusData.csv";
+         = "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateCensusData.csv";
    private static final String STATE_DATA_JSON_FILE_PATH
          = "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateDataJson.json";
 

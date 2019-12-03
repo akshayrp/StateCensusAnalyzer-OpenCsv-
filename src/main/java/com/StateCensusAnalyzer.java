@@ -59,10 +59,18 @@ public class StateCensusAnalyzer
       censusList.sort(c);
    }
 
+   private static void sortListBasedOnDensity(List<CSVStateData> censusList)
+   {
+      Comparator<CSVStateData> c = (s1, s2) ->
+            Integer.parseInt(s2.getDensityPerSqKm()) - Integer.parseInt(s1.getDensityPerSqKm());
+      censusList.sort(c);
+   }
+
    public Boolean storeDataIntoJSON(String FilePath) throws CSVFileException
    {
-      sortListBasedOnStateName(csvCensusDataList);
-      sortListBasedOnPopulation(csvCensusDataList);
+     /* sortListBasedOnStateName(csvCensusDataList);
+      sortListBasedOnPopulation(csvCensusDataList);*/
+      sortListBasedOnDensity(csvCensusDataList);s
       try
       {
          Gson gson = new Gson();
