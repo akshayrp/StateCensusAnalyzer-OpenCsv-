@@ -9,9 +9,9 @@ public class StateCensusTests
 {
    StateCensusAnalyzer stateAnalyzer = new StateCensusAnalyzer();
    private static final String STATE_DATA_FILE_PATH
-         = "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateCensusData.csv";
+         = "/home/admin1/IdeaProjects/StateCensorAnalyzersrc/StateCensusData.csv";
    private static final String STATE_DATA_JSON_FILE_PATH
-         = "/home/admin1/IdeaProjectsStateCensorAnalyzer/src/StateDataJson.json";
+         = "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateDataJson.json";
 
    @Test
    public void givenStateDataCSVFile_WhenCorrect_CountsNumberOfRecordsMatches()
@@ -108,6 +108,21 @@ public class StateCensusTests
 
    @Test
    public void givenCSVFileToConvertToJson_WhenDestinationFilePathIncorrect_Returns()
+   {
+      try
+      {
+         Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
+         Assert.assertTrue(stateAnalyzer.storeDataIntoJSON(STATE_DATA_JSON_FILE_PATH));
+      }
+      catch (CSVFileException e)
+      {
+         System.out.println("Enter Correct File path");
+         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH, e.type);
+      }
+   }
+
+   @Test
+   public void givenCSVFileToConvertToJson_WhenSourceFilePathIncorrect_ReturnsException()
    {
       try
       {

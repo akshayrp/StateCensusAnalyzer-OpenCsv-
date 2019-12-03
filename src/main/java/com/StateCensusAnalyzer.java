@@ -77,8 +77,4 @@ public class StateCensusAnalyzer
          throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH, "File Not Found");
       }
    }
-
-
-
-
 }
