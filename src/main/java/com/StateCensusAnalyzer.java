@@ -13,7 +13,7 @@ import java.util.*;
 
 public class StateCensusAnalyzer
 {
-   List<CSVStateData> CsvCensusDataList = new ArrayList<>();
+   List<CSVStateData> csvCensusDataList = new ArrayList<>();
 
    public int readDataFromFile(String FilePath) throws CSVFileException
    {
@@ -30,7 +30,7 @@ public class StateCensusAnalyzer
          {
             stateCount++;
             CSVStateData csvUser = CsvStateIterator.next();
-            CsvCensusDataList.add(csvUser);
+            csvCensusDataList.add(csvUser);
          }
       }
       catch (IOException e)
@@ -46,15 +46,28 @@ public class StateCensusAnalyzer
    }
 
 
+   private static void sortListBasedOnStateName(List<CSVStateData> censusList)
+   {
+      Comparator<CSVStateData> c = (s1, s2) -> s1.getStateName().compareTo(s2.getStateName());
+      censusList.sort(c);
+   }
+
+   private static void sortListBasedOnPopulation(List<CSVStateData> censusList)
+   {
+      Comparator<CSVStateData> c = (s1, s2) ->
+            Integer.parseInt(s2.getPopulation()) - Integer.parseInt(s1.getPopulation());
+      censusList.sort(c);
+   }
+
    public Boolean storeDataIntoJSON(String FilePath) throws CSVFileException
    {
-      Collections.sort(CsvCensusDataList);
+      sortListBasedOnStateName(csvCensusDataList);
+      sortListBasedOnPopulation(csvCensusDataList);
       try
       {
          Gson gson = new Gson();
-         String json = gson.toJson(CsvCensusDataList);
-         FileWriter writer = null;
-         writer = new FileWriter(FilePath);
+         String json = gson.toJson(csvCensusDataList);
+         FileWriter writer = new FileWriter(FilePath);
          writer.write(json);
          writer.close();
          return true;
@@ -64,5 +77,8 @@ public class StateCensusAnalyzer
          throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH, "File Not Found");
       }
    }
+
+
+
 
 }

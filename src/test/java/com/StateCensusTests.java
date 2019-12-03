@@ -11,7 +11,7 @@ public class StateCensusTests
    private static final String STATE_DATA_FILE_PATH
          = "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateCensusData.csv";
    private static final String STATE_DATA_JSON_FILE_PATH
-         = "/home/admin1/IdeaProjects/StateCensorAnalyzer/src/StateDataJson.json";
+         = "/home/admin1/IdeaProjectsStateCensorAnalyzer/src/StateDataJson.json";
 
    @Test
    public void givenStateDataCSVFile_WhenCorrect_CountsNumberOfRecordsMatches()
@@ -80,6 +80,20 @@ public class StateCensusTests
 
    @Test
    public void storeDataInto_Json()
+   {
+      try
+      {
+         Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
+         Assert.assertTrue(stateAnalyzer.storeDataIntoJSON(STATE_DATA_JSON_FILE_PATH));
+      }
+      catch (CSVFileException e)
+      {
+         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+      }
+   }
+
+   @Test
+   public void storeDataInto_Json_PopulationDescending()
    {
       try
       {
