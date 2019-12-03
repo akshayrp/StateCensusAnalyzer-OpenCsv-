@@ -32,7 +32,6 @@ public class StateCensusAnalyzer
             CSVStateData csvUser = CsvStateIterator.next();
             CsvCensusDataList.add(csvUser);
          }
-         Collections.sort(CsvCensusDataList, Collections.reverseOrder());
       }
       catch (IOException e)
       {
@@ -49,6 +48,7 @@ public class StateCensusAnalyzer
 
    public Boolean storeDataIntoJSON(String FilePath) throws CSVFileException
    {
+      Collections.sort(CsvCensusDataList);
       try
       {
          Gson gson = new Gson();

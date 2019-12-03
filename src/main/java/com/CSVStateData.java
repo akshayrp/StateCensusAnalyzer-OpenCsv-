@@ -60,6 +60,6 @@ public class CSVStateData implements Comparable
 
    @Override
    public int compareTo(Object o) {
-      return (((CSVStateData) o).getStateName()).compareTo(this.getStateName());
+      return this.getStateName().compareTo(((CSVStateData) o).getStateName());
    }
 }
