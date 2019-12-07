@@ -3,7 +3,6 @@ package com;
 import com.google.gson.Gson;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -11,7 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class StateCensusAnalyzer
+
+public class StateCensusAnalyzer<T extends Comparable<T>>
 {
    List<CSVStateData> csvCensusDataList = new ArrayList<>();
 
@@ -24,12 +24,12 @@ public class StateCensusAnalyzer
          reader = Files.newBufferedReader(Paths.get(FilePath));
          CsvToBean<CSVStateData> csvToBean = new CsvToBeanBuilder(reader).withType(CSVStateData.class)
                .withIgnoreLeadingWhiteSpace(true).build();
-         Iterator<CSVStateData> CsvStateIterator = csvToBean.iterator();
+         Iterator<CSVStateData> csvStateIterator = csvToBean.iterator();
 
-         while (CsvStateIterator.hasNext())
+         while (csvStateIterator.hasNext())
          {
             stateCount++;
-            CSVStateData csvUser = CsvStateIterator.next();
+            CSVStateData csvUser = csvStateIterator.next();
             csvCensusDataList.add(csvUser);
          }
       }
@@ -52,10 +52,11 @@ public class StateCensusAnalyzer
       censusList.sort(c);
    }
 
-   private static void sortListBasedOnPopulation(List<CSVStateData> censusList)
+   private static <T> void sortListBasedOnPopulation(List<CSVStateData> censusList)
    {
+
       Comparator<CSVStateData> c = (s1, s2) ->
-            Integer.parseInt(s2.getPopulation()) - Integer.parseInt(s1.getPopulation());
+            Integer.parseInt(s1.getPopulation()) - Integer.parseInt(s1.getPopulation());
       censusList.sort(c);
    }
 
@@ -74,24 +75,25 @@ public class StateCensusAnalyzer
    }
 
 
-   public Boolean storeDataIntoJSON(String FilePath) throws CSVFileException
-   {
-/*      sortListBasedOnStateName(csvCensusDataList);
-      sortListBasedOnPopulation(csvCensusDataList);
-      sortListBasedOnDensity(csvCensusDataList);*/
-      sortListBasedOnStateArea(csvCensusDataList);
-      try
+      public Boolean storeDataIntoJSON (String FilePath) throws CSVFileException
       {
-         Gson gson = new Gson();
-         String json = gson.toJson(csvCensusDataList);
-         FileWriter writer = new FileWriter(FilePath);
-         writer.write(json);
-         writer.close();
-         return true;
-      }
-      catch (IOException e)
-      {
-         throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH, "File Not Found");
+         sortListBasedOnStateName(csvCensusDataList);
+         sortListBasedOnPopulation(csvCensusDataList);
+         sortListBasedOnDensity(csvCensusDataList);
+         sortListBasedOnStateArea(csvCensusDataList);
+
+         try
+         {
+            Gson gson = new Gson();
+            String json = gson.toJson(csvCensusDataList);
+            FileWriter writer = new FileWriter(FilePath);
+            writer.write(json);
+            writer.close();
+            return true;
+         }
+         catch (IOException e)
+         {
+            throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH, "File Not Found");
+         }
       }
    }
-}

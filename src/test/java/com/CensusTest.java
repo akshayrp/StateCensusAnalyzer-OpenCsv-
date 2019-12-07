@@ -3,6 +3,8 @@ package com;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class CensusTest
 {
    StateCensusAnalyzer stateAnalyzer = new StateCensusAnalyzer();
@@ -148,7 +150,22 @@ public class CensusTest
       try
       {
          Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
-         Assert.assertTrue(stateAnalyzer.storeDataIntoJSON(STATE_DATA_JSON_FILE_PATH));
+         try
+         {
+            Assert.assertTrue(stateAnalyzer.storeDataIntoJSON(STATE_DATA_JSON_FILE_PATH));
+         }
+         catch (NoSuchMethodException e)
+         {
+            e.printStackTrace();
+         }
+         catch (IllegalAccessException e)
+         {
+            e.printStackTrace();
+         }
+         catch (InvocationTargetException e)
+         {
+            e.printStackTrace();
+         }
       }
       catch (CSVFileException e)
       {
