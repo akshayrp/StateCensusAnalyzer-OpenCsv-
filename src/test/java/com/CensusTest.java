@@ -21,9 +21,9 @@ public class CensusTest
       {
          Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.WRONG_FILE_PATH, e.type);
       }
    }
 
@@ -34,9 +34,9 @@ public class CensusTest
       {
          Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.WRONG_FILE_PATH, e.type);
       }
    }
 
@@ -47,9 +47,9 @@ public class CensusTest
       {
          Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
 
@@ -60,9 +60,9 @@ public class CensusTest
       {
          Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
 
@@ -73,9 +73,9 @@ public class CensusTest
       {
          Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
 
@@ -86,7 +86,7 @@ public class CensusTest
       {
          Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
          e.printStackTrace();
       }
@@ -99,9 +99,9 @@ public class CensusTest
       {
          Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.WRONG_FILE_PATH, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.WRONG_FILE_PATH, e.type);
       }
    }
 
@@ -112,9 +112,9 @@ public class CensusTest
       {
          Assert.assertEquals(37, stateAnalyzer.readDataFromFile(STATE_CODE_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
 
@@ -125,9 +125,9 @@ public class CensusTest
       {
          Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
 
@@ -138,9 +138,9 @@ public class CensusTest
       {
          Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
 
@@ -150,26 +150,11 @@ public class CensusTest
       try
       {
          Assert.assertEquals(29, stateAnalyzer.readDataFromFile(STATE_DATA_FILE_PATH));
-         try
-         {
-            Assert.assertTrue(stateAnalyzer.storeDataIntoJSON(STATE_DATA_JSON_FILE_PATH));
-         }
-         catch (NoSuchMethodException e)
-         {
-            e.printStackTrace();
-         }
-         catch (IllegalAccessException e)
-         {
-            e.printStackTrace();
-         }
-         catch (InvocationTargetException e)
-         {
-            e.printStackTrace();
-         }
+         Assert.assertTrue(stateAnalyzer.storeDataIntoJSON(STATE_DATA_JSON_FILE_PATH));
       }
-      catch (CSVFileException e)
+      catch (CustomExceptions e)
       {
-         Assert.assertEquals(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
+         Assert.assertEquals(CustomExceptions.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION, e.type);
       }
    }
 }

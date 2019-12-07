@@ -1,6 +1,6 @@
 package com;
 
-public class CSVFileException  extends Exception
+public class CustomExceptions extends Exception
 {
    enum ExceptionType
    {
@@ -9,20 +9,20 @@ public class CSVFileException  extends Exception
    ExceptionType type;
 
 
-   public CSVFileException(ExceptionType type,String message)
+   public CustomExceptions(ExceptionType type, String message)
    {
       super(message);
       this.type = type;
 
    }
 
-   public CSVFileException(String message, Throwable cause, ExceptionType type)
+   public CustomExceptions(String message, Throwable cause, ExceptionType type)
    {
       super(message, cause);
       this.type = type;
    }
 
-   public CSVFileException(Throwable cause, ExceptionType type)
+   public CustomExceptions(Throwable cause, ExceptionType type)
    {
       super(cause);
       this.type = type;

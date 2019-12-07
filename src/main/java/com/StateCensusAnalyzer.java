@@ -15,7 +15,7 @@ public class StateCensusAnalyzer<T extends Comparable<T>>
 {
    List<CSVStateData> csvCensusDataList = new ArrayList<>();
 
-   public int readDataFromFile(String FilePath) throws CSVFileException
+   public int readDataFromFile(String FilePath) throws CustomExceptions
    {
       int stateCount = 0;
       Reader reader = null;
@@ -35,11 +35,11 @@ public class StateCensusAnalyzer<T extends Comparable<T>>
       }
       catch (IOException e)
       {
-         throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH, "File Not Found");
+         throw new CustomExceptions(CustomExceptions.ExceptionType.WRONG_FILE_PATH, "File Not Found");
       }
       catch (RuntimeException e)
       {
-         throw new CSVFileException(CSVFileException.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION,
+         throw new CustomExceptions(CustomExceptions.ExceptionType.CSV_HEADER_MAPPING_EXCEPTION,
                "Cannot Map CSV Header Or issue With Delimiter");
       }
       return stateCount;
@@ -52,7 +52,7 @@ public class StateCensusAnalyzer<T extends Comparable<T>>
       censusList.sort(c);
    }
 
-   private static <T> void sortListBasedOnPopulation(List<CSVStateData> censusList)
+   private static void sortListBasedOnPopulation(List<CSVStateData> censusList)
    {
 
       Comparator<CSVStateData> c = (s1, s2) ->
@@ -75,7 +75,7 @@ public class StateCensusAnalyzer<T extends Comparable<T>>
    }
 
 
-      public Boolean storeDataIntoJSON (String FilePath) throws CSVFileException
+      public Boolean storeDataIntoJSON (String FilePath) throws CustomExceptions
       {
          sortListBasedOnStateName(csvCensusDataList);
          sortListBasedOnPopulation(csvCensusDataList);
@@ -93,7 +93,7 @@ public class StateCensusAnalyzer<T extends Comparable<T>>
          }
          catch (IOException e)
          {
-            throw new CSVFileException(CSVFileException.ExceptionType.WRONG_FILE_PATH, "File Not Found");
+            throw new CustomExceptions(CustomExceptions.ExceptionType.WRONG_FILE_PATH, "File Not Found");
          }
       }
    }
